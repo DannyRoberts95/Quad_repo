@@ -21,6 +21,8 @@ float particleSpawnChance = 0.025;
 
 Kinect kinect;
 
+float rotY = radians(0);
+
 void setup() {
   fullScreen(P3D);
   //size(1200,1200,P3D);
@@ -41,6 +43,10 @@ void draw() {
     );
 
   background(0);
+  
+  //rotateY(rotY);
+  //rotY += 0.1f;
+  
   flowField.updateField();
   
   
