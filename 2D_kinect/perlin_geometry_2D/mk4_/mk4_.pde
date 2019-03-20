@@ -18,7 +18,7 @@ int maxParticleNumber = 2750;
 int linkDistance = 50;
 
 void settings() {
-  fullScreen(P2D);
+  fullScreen(P2D,2);
   //size(1200,1200);
 }
 
