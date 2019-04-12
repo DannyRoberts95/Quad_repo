@@ -15,10 +15,11 @@ class Particle {
     velocity = new PVector(0, 0);
     acceleration = new PVector(0, 0);
 
-    //lifeSpan = random(15, 20);
-    //speed    = random(1,3);
-    lifeSpan = map(mouseX, 0, width, 0, 20);
-    speed    = map(mouseY, 0, height, 1, 10);
+    lifeSpan = random(15, 20);
+    speed = random(1, 3);
+    //lifeSpan = map(mouseX, 0, width, 0, 20);
+    //speed    = map(mouseY, 0, height, 1, 10);
+    //speed    = distortManager.distortionValue / 10;
   }
 
   void run() {
@@ -33,11 +34,13 @@ class Particle {
     location.add(velocity);
     acceleration.mult(0);
     age++;
+
+    //speed = distortManager.distortionValue / 100;
   }
 
   void getFlowForce() {
     // get current velocity
-    PVector force = flowField.lookupVelocity(location);
+    PVector force = flow.lookupVelocity(location);
     force.mult(speed);
     applyForce(force);
   }

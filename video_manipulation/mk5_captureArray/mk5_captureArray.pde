@@ -6,7 +6,7 @@ ArrayList<PImage> captureArray;
 
 
 void settings() {
-  size(1000, 1000, P2D);
+  size(displayHeight, displayHeight, P2D);
 }
 
 void setup() {

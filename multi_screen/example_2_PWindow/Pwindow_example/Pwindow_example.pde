@@ -1,12 +1,14 @@
 PWindow win;
 
+float green = 255;
+
 
 public void settings() {
-  size(320, 240);
+   fullScreen(P2D, 2);
 }
 
 void setup() { 
-  win = new PWindow();
+  win = new PWindow(255);
 }
 
 void draw() {

@@ -1,15 +1,19 @@
 class PWindow extends PApplet {
-  PWindow() {
+  
+  float red;
+  
+  PWindow(float r) {
     super();
+    red = r;
     PApplet.runSketch(new String[] {this.getClass().getSimpleName()}, this);
   }
 
   void settings() {
-    size(500, 200);
+    fullScreen(P2D, 1);
   }
 
   void setup() {
-    background(150);
+    background(red,green,100);
   }
 
   void draw() {

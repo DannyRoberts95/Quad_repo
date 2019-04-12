@@ -1,6 +1,6 @@
 import processing.video.*;
 import SimpleOpenNI.*;
-import processing.serial.*;
+//import processing.serial.*;
 
 //KINECT VARS
 SimpleOpenNI kinect;
@@ -25,9 +25,9 @@ void settings() {
 void setup() { 
   kinect = new SimpleOpenNI(this);
   kinect.enableDepth();
-  kinect.enableRGB();
-  kinect.enableUser();
-  kinect.setMirror(false);
+  //kinect.enableRGB();
+  //kinect.enableUser();
+  //kinect.setMirror(false);
 
   flowField = new FlowField(10);
   particles = new ArrayList<Particle>();
