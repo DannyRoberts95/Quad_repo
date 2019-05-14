@@ -4,7 +4,6 @@ import org.openkinect.processing.*;
 Kinect kinect;
 float minThresh = 550;
 float maxThresh = 775;
-;
 float a;
 PImage img;
 
