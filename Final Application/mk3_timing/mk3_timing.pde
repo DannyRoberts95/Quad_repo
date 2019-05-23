@@ -8,7 +8,7 @@ import processing.sound.*;
 //fullscreen
 // false = 3 900x900px sketchs
 // true = 3 fullscreen sketchs on each display
-boolean FS = true;
+boolean FS = false;
 
 // Sound Variables
 SoundFile sample;
@@ -44,15 +44,15 @@ void setup() {
   kinect = new Kinect(this);
   kinect.initDepth(); 
   kinect.initVideo();
-   
+
   // NUMBERS IN BRACKETS CORRESPOND TO THE SCREEN THE SKECTH WILL DISPLAY ON
   //SCREEN_A = new Aux_Screen(1); // screen 1  
   SCREEN_B = new Main_Screen(1); // screen 2
   //SCREEN_C = new Aux_Screen(3); // screen 3
 
   //Load and play a soundfile and loop it.
-  sample = new SoundFile(this, "scape.wav");
-  //sample = new SoundFile(this, "glitches.mp3");
+  //sample = new SoundFile(this, "scape.wav");
+  sample = new SoundFile(this, "glitches.mp3");
   //sample = new SoundFile(this, "scape.wav");
   fft = new FFT(this, 1);
   distortionValue = 0;
@@ -78,19 +78,29 @@ void draw() {
     float v = reading / 5;
     distortionValue = v*v;
   }
-  
+
   int m = millis();
-  if(m > 62000){
+  if (m > 62000) {
     stageNumber=2;
   }
-  if(m > 66000){
+  if (m > 66000) {
     stageNumber=3;
   }
-  if(m > 123000){
+  if (m > 123000) {
     stageNumber=4;
   }
 }
 
 
 void mouseDragged() {
+}
+
+void keyPressed() {
+  if (key == CODED) {
+    if (keyCode == UP) {
+      stageNumber ++;
+    } else if (keyCode == DOWN) {
+      stageNumber --;
+    }
+  }
 }

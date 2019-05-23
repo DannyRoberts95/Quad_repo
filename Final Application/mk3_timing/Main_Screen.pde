@@ -26,7 +26,7 @@ class Main_Screen extends PApplet {
     if (FS) {
       fullScreen(P2D, screenNumber);
     } else {
-      size(500, 500, P2D);
+      size(900, 900, P2D);
     }
   }
 
@@ -66,8 +66,10 @@ class Main_Screen extends PApplet {
       displayThresholdImage();
     } else if (stageNumber == 2) {
       displayRectRender();
-      displayWalkerImage();
     } else if (stageNumber == 3) {
+      displayWalkerImage();
+    } else if (stageNumber == 4) {
+      displayRectRender();
       displayWalkerImage();
     }
 

@@ -17,7 +17,7 @@ class Aux_Screen extends PApplet {
     if (FS) {
       fullScreen(P2D, screenNumber);
     } else {
-      size(500, 500, P2D);
+      size(900, 900, P2D);
     }
   }
   public void setup() { 
