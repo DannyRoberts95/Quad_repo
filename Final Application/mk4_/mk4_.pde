@@ -50,11 +50,11 @@ void setup() {
   //SCREEN_C = new Aux_Screen(3); // screen 3
 
   //Load and play a soundfile and loop it.
-  sample = new SoundFile(this, "scape.wav");
-  //sample = new SoundFile(this, "glitches.mp3");
+  //sample = new SoundFile(this, "scape.wav");
+  sample = new SoundFile(this, "glitches.mp3");
   fft = new FFT(this, 1);
   distortionValue = 0;
-  spectrumScaleFactor = 100;
+  spectrumScaleFactor = 700;
   smoothingFactor = 0.2;
   sum = new float[bands];
   sample.loop();

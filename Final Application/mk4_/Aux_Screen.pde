@@ -1,6 +1,4 @@
 class Aux_Screen extends PApplet {
-
-
   //Visual Variables
   PImage capture;
   //Scene Vars

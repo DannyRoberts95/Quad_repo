@@ -3,16 +3,12 @@ class Main_Screen extends PApplet {
   //Scene Vars
   int screenNumber;
   float glitchValue;
-  float minThresh = 500;
-  float maxThresh = 1800;
+  float minThresh = 0;
+  float maxThresh = 750;
   PImage thresholdImage;
-
-
-
 
   //WALKER VARIABLES
   ArrayList<Particle> particles;
-
 
   public Main_Screen(int screenN ) {
     super();
@@ -46,23 +42,23 @@ class Main_Screen extends PApplet {
     background(cols[0]);
 
     pushMatrix();
-    fill(255);
+    fill(0);
     text(distortionValue, 50, 50);
 
-    fill(255);
+    fill(0);
     text(frameRate, 50, 100);
     popMatrix();    
 
     glitchValue = distortionValue;
 
     int glitchCap = 2000;
-    float gv = constrain(glitchValue, 0, glitchCap);
-    //maxThresh = map(gv, 0, glitchCap, maxThresh/2, maxThresh);
-    maxThresh = 750;
-
+ 
     if (stageNumber == 1) {
+      
       displayThresholdImage();
       horizontalSlitGlitch();
+      //displayRectRender();
+      //displayWalkerImage();
     } else if (stageNumber == 2) {
       displayRectRender();
     } else if (stageNumber == 3) {
@@ -215,6 +211,93 @@ class Main_Screen extends PApplet {
       } else p.run();
     }
   }
-}
+  
+  //************************
+  //CLASSES 
+  //************************
+  
+  class Particle {
+    PVector location, origin;
+    PVector prevLocation;
+    PVector velocity;
+    PVector acceleration;
+    float speed;
+    float lifeSpan;
+    float age;
+    color col;
 
-SCREEN_B
+
+    Particle (float x, float y, float s) {
+      location = new PVector(x, y);
+      origin = location.copy();
+      prevLocation = location.copy();
+      velocity = new PVector(0, 0);
+      acceleration = new PVector(0, 0);
+      age = 0;
+      lifeSpan = random(15);
+      speed    = s;
+
+      int r = floor(random(cols.length));
+      col = cols[r];
+    }
+
+    void run() {
+      update();
+      display();
+    }
+
+    void update() {
+
+      updatePrev();
+      float r = random(1);
+      if (r<0.25) {
+        location.x += speed;
+      } else if (r<0.5) {
+        location.x -= speed;
+      } else if (r<0.75) {
+        location.y -= speed;
+      } else {
+        location.y += speed;
+      }
+
+      glitchValue = distortionValue;
+      int glitchCap = 2000;
+      float gv = constrain(glitchValue, 0, glitchCap);
+      speed = map(gv, 0, glitchCap, 1, 100);
+
+      age++;
+    }
+
+    void display() {
+      int posX = floor(map(location.x, 0, width, 0, kinect.width));
+      int posY = floor(map(location.y, 0, height, 0, kinect.height));
+
+      //float h = hue(kinect.getVideoImage().get(floor(posX), floor(posY)));
+      //float s = saturation(kinect.getVideoImage().get(floor(posX), floor(posY)));
+      float b = brightness(kinect.getVideoImage().get(floor(posX), floor(posY)));
+
+      //float od = dist(location.x, location.y, origin.x, origin.y);
+      //float a = map(od, 0, width/2, 100, 0);
+      //float sw = map(od, 0, width/2, 10, 0);
+
+      float sw = map(age, 0, lifeSpan, 12, 0);
+      float a = map(age, 0, lifeSpan, 100, 0);
+      strokeCap(PROJECT);
+      stroke(hue(col), saturation(col), brightness(col), a);
+      strokeWeight(sw);
+
+
+      //point(location.x, location.y);
+      line(location.x, location.y, prevLocation.x, prevLocation.y);
+    }
+
+    void updatePrev() {
+      prevLocation.x = location.x;
+      prevLocation.y = location.y;
+    }
+
+    void applyForce(PVector force) {
+      acceleration.add(force);
+    }
+  }
+}
